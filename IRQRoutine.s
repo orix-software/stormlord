@@ -83,13 +83,14 @@ skip1	dex
 	lda GameFlag
 .(
 	beq skip1
-	ldx Option_Input
-	beq skip1
-	dex
-	bne skip2
-	jsr ReadIJK
-	jmp skip1
-skip2	jsr ReadPASE
+	jsr ReadTelestrat
+	;ldx Option_Input
+	;beq skip1
+	;dex
+	;bne skip2
+	;jsr ReadIJK
+	;jmp skip1
+;skip2	jsr ReadPASE
 skip1	;Update Sunmoon every 10 seconds (25 per second)
 .)
 	dec SecondCounter
