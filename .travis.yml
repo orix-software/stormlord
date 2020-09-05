@@ -11,6 +11,7 @@ after_success:
     - mkdir -p build/usr/share/man/
     - mkdir -p build/usr/share/fonts/
     - mkdir -p build/usr/share/stormld/
+    - mkdir -p build/bin
     - cp Makefile build/usr/src/stormld/
     - cp stormld build/bin
     - cd build && tar -c * > ../stormld.tar && cd ..
