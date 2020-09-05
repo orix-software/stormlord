@@ -6,3 +6,18 @@ before_install:
     - cd buildTestAndRelease/ && sh make.sh
     - cd ..
 
+after_success:
+    - mkdir -p build/usr/src/stormld/src/
+    - mkdir -p build/usr/share/man/
+    - mkdir -p build/usr/share/fonts/
+    - mkdir -p build/usr/share/stormld/
+    - cp Makefile build/usr/src/stormld/
+    - cp stormld build/bin
+    - cd build && tar -c * > ../stormld.tar && cd ..
+    - gzip stormld.tar
+    - mv stormld.tar.gz stormld.tgz
+    - 'if [ "$TRAVIS_PULL_REQUEST" = "false" -a "$TRAVIS_BRANCH" = "master" ]; then VERSION=`cat VERSION`; else VERSION=alpha; fi'
+    - echo $VERSION
+    - curl -X POST --data-binary '@stormld.tgz' "https://cdn.oric.org/publish.php?hash=$hash&path=/home/oricoujr/www/ftp/orix/dists/$VERSION/tgz/6502/stormld.tgz"    
+
+
